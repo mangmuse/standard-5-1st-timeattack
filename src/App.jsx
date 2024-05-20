@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import useTodos from "./hooks/useTodos";
 
 export default function App() {
-  const [todos, setTodos] = useState(getTodosFromLocalStorage());
-  const handleAdd = (newTodo) => setTodos((todos) => [...todos, newTodo]);
-  const handleUpdate = (updated) =>
-    setTodos((todos) =>
-      todos.map((todo) => (todo.id === updated.id ? updated : todo))
-    );
-  const handleDelete = (toBeDeleted) =>
-    setTodos((todos) => todos.filter((todo) => todo.id !== toBeDeleted.id));
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
+  const { todos, handleAdd, handleUpdate, handleDelete } = useTodos();
   return (
     <>
       <h1>투두리스트 타임어택</h1>
@@ -32,9 +22,4 @@ export default function App() {
       />
     </>
   );
-}
-
-function getTodosFromLocalStorage() {
-  const todos = localStorage.getItem("todos");
-  return todos ? JSON.parse(todos) : [];
 }
