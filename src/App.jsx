@@ -11,8 +11,8 @@ export default function App() {
           onChange={(e) => setNum(e.target.value)}
           value={num}
           type="number"
-        />{" "}
-        만큼을{" "}
+        />
+        만큼을
         <button onClick={() => setTotalCount((prev) => prev + +num)}>
           더할게요
         </button>
